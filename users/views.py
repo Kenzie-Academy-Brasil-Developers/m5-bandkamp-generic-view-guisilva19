@@ -1,4 +1,3 @@
-from rest_framework.views import APIView, Request, Response, status
 from .models import User
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import UserSerializer
@@ -9,9 +8,9 @@ from rest_framework import generics
 class UserView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
-class UserDetailView(generics.RetrieveUpdateDestroyAPIView()):
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAccountOwner]
 
     serializer_class = UserSerializer
-    query_set = User.objects.all()
+    queryset = User.objects.all()
